@@ -184,16 +184,25 @@ void example_4( void ) {
 #endif
 }
 
-int main( int argc, char ** argv ) {
+void example_5() {
+    Mat img = imread("Lenna.png", 0);
+    img.convertTo(img, CV_64F);
+	
+    clock_t startTime, endTime;
+    LBP lbp(8, LBP_MAPPING_NONE);
+    startTime = clock();
+    lbp.calcLBP(img);
+    endTime = clock();
 
-	clock_t startTime, endTime;
+    Mat lbpImg = lbp.getLBPImage();
+    cout << "Example took " << double(endTime - startTime) / double(CLOCKS_PER_SEC) << "s" << endl;
 
-	startTime = clock();
-	example_4();
-	endTime = clock();
-	cout << "Example took " << double( endTime - startTime ) / double( CLOCKS_PER_SEC ) << "s"
-				<< endl;
+    cout << "Writing to Lenna_lbp.png" << endl;
+    imwrite("Lenna_lbp.png", lbpImg);
+}
 
-	return 0;
+int main(int argc, char ** argv) {
+    example_5();
+    return 0;
 }
 
