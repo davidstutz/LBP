@@ -64,24 +64,3 @@ if(BUILD_LBPGPU)
 	)
 
 endif(BUILD_LBPGPU)
-
-
-
-option(BUILD_PYTHON "Build SWIG/Python module" OFF)
-if(BUILD_PYTHON)
-    add_subdirectory(python)
-endif(BUILD_PYTHON)
-
-
-###############################################################################
-## 								Install
-# Binaries and libs
-install(TARGETS LBP LBPGPU LBPMain
-	RUNTIME DESTINATION bin
-	LIBRARY DESTINATION lib
-#	ARCHIVE DESTINATION lib
-)
-# Header files
-install(FILES LBP.hpp
-	DESTINATION include 
-)
