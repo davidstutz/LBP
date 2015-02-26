@@ -142,7 +142,7 @@ void example_4( void ) {
 	int w = 6, h = 6;
 	Mat img( h, w, CV_8U, pixels );
 #else
-	Mat img = imread( "../test_image_1.png", 0 );
+	Mat img = imread( "test_image_1.bmp", 0 );
 #endif
 
 	img.convertTo( img, CV_64F );
@@ -158,7 +158,7 @@ void example_4( void ) {
 	LBP lbp( 8, LBP_MAPPING_NONE );
 	// Calculate the descriptor
 	startTime = clock();
-	lbp.calcGPU( img );
+	lbp.calcLBP( img );
 	endTime = clock();
 
 	Mat lbpImg = lbp.getLBPImage();
@@ -172,10 +172,15 @@ void example_4( void ) {
 		}
 		printf( "\n" );
 	}
-#elseif 0
+#endif
+#if 0
 	namedWindow("res");
 	imshow("res", lbpImg);
 	waitKey(0);
+#endif
+#if 1
+        cout << "Writing to res.png" << endl;
+        imwrite("res.png", lbpImg);
 #endif
 }
 
